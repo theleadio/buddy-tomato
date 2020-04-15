@@ -1,6 +1,34 @@
+import firebase from 'firebase/app';
+import 'firebase/database'
+
+var firebaseConfig = {
+  apiKey: 'AIzaSyDfjP5Mne6iAsR6pWNCd4-DdpanrBMDRk8',
+  authDomain: 'buddy-tomato.firebaseapp.com',
+  databaseURL: 'https://buddy-tomato.firebaseio.com',
+  projectId: 'buddy-tomato',
+  storageBucket: 'buddy-tomato.appspot.com',
+  messagingSenderId: '530853447243',
+  appId: '1:530853447243:web:393cad25c74cb66ae32fce',
+  measurementId: 'G-JFQE7SPPB0'
+}
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig)
+}
+
+export const fireDb = firebase.database() // --> This alone throws the error mesage.
 
 export default {
-  mode: 'universal',
+  
+  hooks: {
+    generate: {
+      done(builder) {
+        fireDb.goOffline()
+      }
+    }
+  },
+
+  mode: 'spa',
   /*
   ** Headers of the page
   */
