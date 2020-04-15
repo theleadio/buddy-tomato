@@ -19,6 +19,9 @@ if (!firebase.apps.length) {
 export const fireDb = firebase.database() // --> This alone throws the error mesage.
 
 export default {
+  generate: {
+    fallback: true
+  },
   
   hooks: {
     build: {
