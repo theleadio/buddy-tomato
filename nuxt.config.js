@@ -21,7 +21,7 @@ export const fireDb = firebase.database() // --> This alone throws the error mes
 export default {
   
   hooks: {
-    generate: {
+    build: {
       done(builder) {
         fireDb.goOffline()
       }
