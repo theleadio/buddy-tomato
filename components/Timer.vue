@@ -48,7 +48,10 @@ export default {
             this.timeInterval = false;
           }
           else {
-            this.timeInterval = setInterval(() => (this.timeLeft -= 1), 1000);
+            this.timeInterval = setInterval(() => {
+              this.timeLeft -= 1;
+              document.cookie = "timeLeft="+ this.timeLeft
+            }, 1000);
           }
         },
         async readFireStore() {
@@ -85,7 +88,7 @@ export default {
       var postId = this.id;
       var starCountRef = this.$fireDb.ref('timers/' + postId + '/reaction');
       starCountRef.on('value', function(snapshot) {
-        console.log('vvv: ', snapshot.val());
+        console.log('updated: ', snapshot.val());
         vm.counter = snapshot.val();
 });
     }

@@ -3,26 +3,19 @@
     <div>
       <logo />
       <h1 class="title">
-        buddy-tomato
+        Buddy Tomato
       </h1>
       <h2 class="subtitle">
-        My praiseworthy Nuxt.js project
+        Boost productivity with your friends!
       </h2>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+       <button class="button--green" v-on:click="createTimer()">
+          Create a New Timer
+        </button>        
+      </div>
+      <div class='mt-10'>Buddy Tomato is a timer based on Pomodoro techniques. It increases your productivity and allows your friends to monitor your progress and support!</div>
+      <div class="mt-10">
+        Brought to you by <a class='text-blue-500' href='https://www.thelead.io'>LEAD</a>
       </div>
     </div>
   </div>
@@ -34,7 +27,12 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
-  }
+  },
+   methods: {
+      async createTimer() {
+        console.log('create new timer');
+      }
+    }
 }
 </script>
 
