@@ -15,7 +15,7 @@ export default {
       var newCount = this.counter + 1;
       var updates = {};
       updates[this.field] = newCount
-      var countRef = this.$fireDb.ref('timers/' + this.$parent.id + '/reaction');
+      var countRef = this.$fireDb.ref('timers/' + this.$parent.id + '/reactions');
       countRef.update(updates);
       
     }

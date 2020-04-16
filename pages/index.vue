@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        Buddy Tomato
+        Focus
       </h1>
       <h2 class="subtitle">
         Boost productivity with your friends!
@@ -13,7 +13,8 @@
           Create a New Timer
         </button>        
       </div>
-      <div class='mt-10'>Buddy Tomato is a timer based on Pomodoro techniques. It increases your productivity and allows your friends to monitor your progress and support!</div>
+      <div class='mt-10'>Focus is a timer based on Pomodoro techniques. It increases your productivity and allows your friends to monitor your progress and support!</div>
+      <div>Don't forget to take your deserve break after 25 minutes of hardwork!</div>
       <div class="mt-10">
         Brought to you by <a class='text-blue-500' href='https://www.thelead.io'>LEAD</a>
       </div>
@@ -31,6 +32,19 @@ export default {
    methods: {
       async createTimer() {
         console.log('create new timer');
+        var timerRef = this.$fireDb.ref('timers/');
+        var key = timerRef.push().key;
+        var newRef = this.$fireDb.ref('timers/' + key); 
+        newRef.set({
+          reactions: {
+            clap:0,
+            heart:0,
+            bottle:0,
+            run:0
+          }
+        })
+        console.log('New timer created, redirecting...')
+        this.$router.push(key);
       }
     }
 }

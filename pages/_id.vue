@@ -2,13 +2,13 @@
   <div class="w-screen flex-col">
     <div class="flex">
       <div class="w-full mt-5">
-        <h1 class='text-5xl text-center'>🍅 Buddy Tomato 🍅 </h1>
+        <h1 class='text-5xl text-center'>🍅 Focus 🍅 </h1>
         <h2></h2>
       </div>
     </div>
       <div class="flex">
       <div class="w-full justify-center">
-        <Timer id='udMJEWnSp8ZIAz0mTlvT' />
+        <Timer :id='$route.params.id' />
       </div>
     </div>
   </div>

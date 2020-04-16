@@ -6,7 +6,7 @@
 
     <div>
       <button v-on:click="toggleTimer()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ timerStatus }}</button>
-      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Reset</button>
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" v-on:click="resetTimer()">Reset</button>
     </div>
 
     <div class='pt-8'>
@@ -54,15 +54,9 @@ export default {
             }, 1000);
           }
         },
-        async readFireStore() {
-          console.log(this.$fireStore)
-          var docs = await this.$fireStore.collection("timers")
-          .get()
-          .then(snaps => {
-            snaps.forEach(function(doc) {
-              console.log(doc.data());
-            })
-          })
+        resetTimer() {
+          console.log('reset timer');
+          this.timeLeft = 1500;
         }
     },
     computed: {
@@ -86,11 +80,11 @@ export default {
     mounted: function () {
       let vm = this;
       var postId = this.id;
-      var starCountRef = this.$fireDb.ref('timers/' + postId + '/reaction');
+      var starCountRef = this.$fireDb.ref('timers/' + postId + '/reactions');
       starCountRef.on('value', function(snapshot) {
         console.log('updated: ', snapshot.val());
         vm.counter = snapshot.val();
-});
+      });
     }
 }
 </script>
