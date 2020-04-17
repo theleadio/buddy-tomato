@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+<div class="flex">
+  <div class="text-center w-full">
     <div>
       <logo />
       <h1 class="title">
@@ -13,12 +14,32 @@
           Create a New Timer
         </button>        
       </div>
-      <div class='mt-10'>Focus is a timer based on Pomodoro techniques. It increases your productivity and allows your friends to monitor your progress and support!</div>
-      <div>Don't forget to take your deserve break after 25 minutes of hardwork!</div>
+      <div class='mt-10 mx-6'>
+        <p>Focus is a productivity app based on the Pomodoro Technique by Francesco Cirilo. The technique breaks down your work into intervals, called a Pomodoro – each at 25 minutes.</p>
+      </div>
+
+      <div class='text-left mx-6'>
+        <h2 class='text-2xl mt-5'>Why use Focus?</h2>
+        <p>During each Pomodoro interval (25 minutes), put in maximum focus on your task and avoid distractions. By focusing, you will find yourself completing projects faster with less mental fatigue. </p>
+        <p class='mt-4 mb-4 font-bold'>The goal of this technique is to reduce internal and external distractions when working.</p>
+
+        <h2 class='text-2xl my-4'>Here's how to use it: </h2>
+        <ol class='list-decimal ml-4'>
+          <li>Decide on a task to do.</li>
+          <li>Start the timer & work on your task.</li>
+          <li>End your work when the timer rings. </li>
+          <li>When the timer ends, take a 5 minutes break. </li>
+          <li>After four pomodoros, take a 30 minutes break.</li>
+      </ol>
+
+
+      </div>
+      
       <div class="mt-10">
         Brought to you by <a class='text-blue-500' href='https://www.thelead.io'>LEAD</a>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
