@@ -1,19 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/database'
 
-var firebaseConfig = {
-  apiKey: 'AIzaSyDfjP5Mne6iAsR6pWNCd4-DdpanrBMDRk8',
-  authDomain: 'buddy-tomato.firebaseapp.com',
-  databaseURL: 'https://buddy-tomato.firebaseio.com',
-  projectId: 'buddy-tomato',
-  storageBucket: 'buddy-tomato.appspot.com',
-  messagingSenderId: '530853447243',
-  appId: '1:530853447243:web:393cad25c74cb66ae32fce',
-  measurementId: 'G-JFQE7SPPB0'
-}
+const firebaseConfig = process.env.ENVIRONMENT === "PROD"? process.env.FIREBASE_CRENDETIAL: process.env.FIREBASE_DEV_CRED
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp(JSON.parse(firebaseConfig))
 }
 
 export const fireDb = firebase.database() // --> This alone throws the error mesage.
@@ -70,6 +61,7 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    ['@nuxtjs/dotenv', { path: './' }]
   ],
   /*
   ** Nuxt.js modules
@@ -78,18 +70,10 @@ export default {
     [
       '@nuxtjs/firebase',
       {
-        config: {
-          apiKey: 'AIzaSyDfjP5Mne6iAsR6pWNCd4-DdpanrBMDRk8',
-          authDomain: 'buddy-tomato.firebaseapp.com',
-          databaseURL: 'https://buddy-tomato.firebaseio.com',
-          projectId: 'buddy-tomato',
-          storageBucket: 'buddy-tomato.appspot.com',
-          messagingSenderId: '530853447243',
-          appId: '1:530853447243:web:393cad25c74cb66ae32fce',
-          measurementId: 'G-JFQE7SPPB0'
-        },
+        config: firebaseConfig,
         services: {
-          realtimeDb: true // Just as example. Can be any other service.
+          realtimeDb: false, // Just as example. Can be any other service.
+          auth: true
         }
       }
     ],
