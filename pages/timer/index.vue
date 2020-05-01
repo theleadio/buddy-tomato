@@ -17,9 +17,9 @@
                 <div class="text-7xl tracking-wide md:text-9xl">{{ timeLeft | pretty }}</div>
             </div>
             <div class="mx-auto">
-                <button class="hover:bg-blue-600 transition duration-300 ease-in-out bg-blue-400 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none active:outline-none" @click="toggleTimer"> {{timeInterval? 'Pause': 'Start'}} </button>
-                <button class="hover:bg-red-600 transition duration-300 ease-in-out bg-red-400 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none active:outline-none" @click="resetTimer"> Reset </button>
-                <button class="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-500 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none active:outline-none"> History </button>
+                <a href="#" class="hover:bg-blue-600 transition duration-300 ease-in-out bg-blue-400 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none active:outline-none" @click="toggleTimer"> {{timeInterval? 'Pause': 'Start'}} </a>
+                <a href="#" class="hover:bg-red-600 transition duration-300 ease-in-out bg-red-400 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none active:outline-none" @click="resetTimer"> Reset </a>
+                <a href="#" class="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-500 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none active:outline-none"> History </a>
             </div>
         </div>
     </div>
