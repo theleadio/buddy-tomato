@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="mx-auto my-10">
-            <a class="transition duration-300 ease-in-out rounded-full bg-green-400 py-3 px-6 text-white text-sm font-bold hover:no-underline hover:bg-green-600" href="/timer">
+            <a class="transition duration-300 ease-in-out rounded-full bg-green-400 py-3 px-6 text-white text-sm font-bold hover:no-underline hover:bg-green-600 focus:outline-none active:outline-none" href="/timer">
                 Create a New Timer
             </a>
         </div>
