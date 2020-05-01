@@ -91,3 +91,4 @@ sw.*
 node_modules
 
 *.json
+firebase-auth-sw.js

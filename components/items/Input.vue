@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div>
         <input v-bind:class="{
             'input': true,
             'appearance-none': true,
@@ -12,12 +12,10 @@
             'pb-1': true,
             'focus': false,
             'font-sans': true,
-            'text-center':true,
             'focus:outline-none': true,
             'active:outline-none': true,
-            'text-2xl':true,
+            'text-center':textCenter,
             'filled':(this.value.length > 0)? true : false,
-            
             }" 
             :id="labelId" 
             :type="(inputType)?inputType:'text'" 
@@ -32,11 +30,11 @@
                 absolute 
                 mb-0 
                 -mt-2 
-                pt-3 
-                pl-10 
+                pt-4 
+                pl-4 
                 leading-tighter 
                 text-gray-400
-                text-2xl
+                text-lg
                 mt-2 
                 cursor-text
                 font-sans
@@ -44,9 +42,6 @@
             >
             {{(labelName)?labelName:"Debug"}}
         </label>
-        <div class="absolute top-0 right-0 p-4">
-            <i class="fas fa-pencil-alt text-gray-400"></i>
-        </div>
     </div>
 </template>
 <script>
@@ -57,7 +52,8 @@ export default {
         inputType: String,
         focus: Boolean,
         value: String,
-        disabled:Boolean
+        disabled:Boolean,
+        textCenter:Boolean
     },
     computed:{
         inputModel:{

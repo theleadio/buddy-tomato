@@ -10,8 +10,13 @@
                 </div>
             </div>
             <div class="mx-auto w-full px-10 md:w-1/2 lg:w-1/3">
-                <inputElmt :labelName="'Tasks Name'" :labelId="'title'" :focus="false" :value="title" @input="setTitle($event)" 
-                    :disabled="false"/>
+                <div class="relative">
+                    <inputElmt :labelName="'Tasks Name'" :labelId="'title'" :focus="false" :value="title" @input="setTitle($event)" 
+                        :disabled="false" class="border-b shadow-md text-2xl" :textCenter="true"/>
+                    <div class="absolute top-0 right-0 p-4">
+                        <i class="fas fa-pencil-alt text-gray-400"></i>
+                    </div>
+                </div>
             </div>
             <div class="mx-auto my-5 items-center">
                 <div class="text-7xl tracking-wide md:text-9xl">{{ timeLeft | pretty }}</div>

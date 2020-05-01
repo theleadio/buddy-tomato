@@ -1,26 +1,26 @@
-import firebase from 'firebase/app';
-import 'firebase/database'
+// import firebase from 'firebase/app';
+// import 'firebase/database'
 
 const firebaseConfig = process.env.ENVIRONMENT === "PROD"? process.env.FIREBASE_CRENDETIAL: process.env.FIREBASE_DEV_CRED
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(JSON.parse(firebaseConfig))
-}
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(JSON.parse(firebaseConfig))
+// }
 
-export const fireDb = firebase.database() // --> This alone throws the error mesage.
+// export const fireDb = firebase.database() // --> This alone throws the error mesage.
 
 export default {
   generate: {
     fallback: true
   },
   
-  hooks: {
-    build: {
-      done(builder) {
-        fireDb.goOffline()
-      }
-    }
-  },
+  // hooks: {
+  //   build: {
+  //     done(builder) {
+  //       fireDb.goOffline()
+  //     }
+  //   }
+  // },
 
   mode: 'universal',
   /*
@@ -70,10 +70,17 @@ export default {
     [
       '@nuxtjs/firebase',
       {
-        config: firebaseConfig,
+        config: JSON.parse(firebaseConfig),
         services: {
           realtimeDb: false, // Just as example. Can be any other service.
-          auth: true
+          auth: {
+            persistence: 'local',
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChanged',
+              // onAuthStateChangedMutation: 'onAuthStateChangedMutation',
+            },
+            ssr: true
+          }
         }
       }
     ],

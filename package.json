@@ -2,7 +2,7 @@
   "name": "buddy-tomato",
   "version": "1.0.0",
   "description": "My praiseworthy Nuxt.js project",
-  "author": "Dr. Lau Cher Han",
+  "author": "LEAD",
   "private": true,
   "scripts": {
     "dev": "nuxt",
