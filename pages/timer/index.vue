@@ -1,6 +1,5 @@
 <template>
-    <div class="h-screen w-screen">
-        <naviWrapper />
+    <div class="h-full w-full md:h-screen md:w-screen">
         <div class="flex flex-col py-5">
             <div class="mx-auto">
                 <img class="w-24 object-cover" src="~/assets/svg/tomato.svg" />
@@ -15,7 +14,7 @@
                     :disabled="false"/>
             </div>
             <div class="mx-auto my-5 items-center">
-                <div class="text-9xl tracking-wide">{{ timeLeft | pretty }}</div>
+                <div class="text-7xl tracking-wide md:text-9xl">{{ timeLeft | pretty }}</div>
             </div>
             <div class="mx-auto">
                 <button class="hover:bg-blue-600 transition duration-300 ease-in-out bg-blue-400 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none hover:outline-none" @click="toggleTimer"> {{timeInterval? 'Pause': 'Start'}} </button>
@@ -23,19 +22,14 @@
                 <button class="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-500 text-white font-bold font-sans rounded-full py-2 px-6 mx-2 focus:outline-none hover:outline-none"> History </button>
             </div>
         </div>
-        <footerWrapper />
     </div>
 </template>
 <script>
-import NaviWrapper from "~/components/navi/Wrapper.vue";
 import InputElement from "~/components/items/Input.vue";
-import FooterWrapper from "~/components/footer/Wrapper.vue";
 
 export default {
     components:{
-        naviWrapper: NaviWrapper,
-        inputElmt: InputElement,
-        footerWrapper: FooterWrapper
+        inputElmt: InputElement
     },
     data: () =>{
         return {

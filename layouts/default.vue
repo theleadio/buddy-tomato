@@ -1,8 +1,24 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="flex flex-col h-screen">
+    <naviWrapper/>
+    <div class="flex-1">
+      <nuxt/>
+    </div>
+    <footerWrapper />
   </div>
 </template>
+<script>
+import NaviWrapper from "~/components/navi/Wrapper.vue";
+import FooterWrapper from "~/components/footer/Wrapper.vue";
+
+export default {
+    components:{
+        naviWrapper: NaviWrapper,
+        footerWrapper: FooterWrapper
+    }
+  
+}
+</script>
 
 <style>
 html {
