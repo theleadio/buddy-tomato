@@ -54,6 +54,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    // { src: '~/plugins/localStorage.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -76,8 +77,8 @@ export default {
           auth: {
             persistence: 'local',
             initialize: {
-              onAuthStateChangedAction: 'onAuthStateChanged',
-              // onAuthStateChangedMutation: 'onAuthStateChangedMutation',
+              onAuthStateChangedAction: 'auth/onAuthStateChangedAction',
+              // onAuthStateChangedMutation: 'auth/onAuthStateChangedMutation',
             },
             ssr: true
           }
@@ -97,7 +98,8 @@ export default {
          }
        ]
       }
-]
+    ],
+    // ['cookie-universal-nuxt', { alias: 'focus-cookiz' }]
   ],
   /*
   ** Build configuration

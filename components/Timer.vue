@@ -92,11 +92,11 @@ export default {
     mounted: function () {
       let vm = this;
       var postId = this.id;
-      var starCountRef = this.$fireDb.ref('timers/' + postId + '/reactions');
-      starCountRef.on('value', function(snapshot) {
-        console.log('updated: ', snapshot.val());
-        vm.counter = snapshot.val();
-      });
+      // var starCountRef = this.$fireDb.ref('timers/' + postId + '/reactions');
+      // starCountRef.on('value', function(snapshot) {
+      //   console.log('updated: ', snapshot.val());
+      //   vm.counter = snapshot.val();
+      // });
     }
 }
 </script>

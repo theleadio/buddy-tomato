@@ -30,16 +30,31 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center mt-10">
-                        <a href="#" class="font-bold transition duration-300 eas-in-out py-3 px-24 bg-green-500 text-white rounded-full hover:bg-green-700 hover:outline-none hover:no-underline">Log In</a>
+                        <a href="#" class="font-bold transition duration-300 ease-in-out py-3 px-24 bg-green-500 text-white rounded-full hover:shadow-lg hover:bg-green-700 hover:outline-none hover:no-underline">Log In</a>
                     </div>
                 </form>
             </div>
+            <div class="mx-auto  px-20 w-full md:w-1/2 mt-4">
+                <div class="flex items-center justify-center text-sm font-sans pb-2">
+                    Social Login
+                </div>
+                <div class="flex items-center justify-center">
+                    <div class="relative py-4">
+                        <a href="#" class="pl-10 pr-12 md:pr-12 bg-white rounded-full border-2 py-3 font-bold transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-100 hover:outline-none hover:no-underline" @click="googleLogin">Log In with Google </a>
+                        <div class="absolute top-0 right-0 p-1">
+                            <div class="h-12 w-12 p-3">
+                                <img class="h-full w-full object-cover" src="~/assets/img/google-icon.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="mx-auto mt-5">
-                <div class="flex items-center justify-center my-2">
+                <div class="flex items-center justify-center my-2 text-sm font-sans">
                     Don't have an account?
                 </div>
                 <div class="flex justify-center">
-                    <a href="#" class="font-bold transition duration-300 eas-in-out py-2 px-12 bg-gray-500 text-white rounded-full hover:bg-gray-700 hover:outline-none hover:no-underline">Sign up</a>
+                    <a href="" class="font-bold transition duration-300 ease-in-out py-2 px-12 bg-gray-500 text-white rounded-full hover:shadow-lg hover:bg-gray-700 hover:outline-none hover:no-underline">Sign up</a>
                 </div>
             </div>
         </div>
@@ -59,6 +74,14 @@ export default {
         }
     },
     methods:{
+        googleLogin: async function(){
+            const provider = new this.$fireAuthObj.GoogleAuthProvider()
+            await this.$fireAuth.signInWithPopup(provider).then(
+                result => {
+                    this.$router.push("/new")
+                }
+            ).catch(e => console.error(e));
+        }
     }
 }
 </script>

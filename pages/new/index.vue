@@ -14,9 +14,9 @@
             </div>
         </div>
         <div class="mx-auto my-10">
-            <a class="transition duration-300 ease-in-out rounded-full bg-green-400 py-3 px-6 text-white text-sm font-bold hover:no-underline hover:bg-green-600 focus:outline-none active:outline-none" href="/timer">
+            <nuxt-link to="/timer" class="transition duration-300 ease-in-out rounded-full bg-green-400 py-3 px-6 text-white text-sm font-bold hover:no-underline hover:bg-green-600 focus:outline-none active:outline-none">
                 Create a New Timer
-            </a>
+            </nuxt-link>
         </div>
         <div class="mx-auto md:mt-20 px-12 md:px-24 lg:px-64">
             <div class="font-semibold font-sans text-center">

@@ -33,6 +33,7 @@
 import InputElement from "~/components/items/Input.vue";
 
 export default {
+    middleware: 'authenticate',
     components:{
         inputElmt: InputElement
     },
