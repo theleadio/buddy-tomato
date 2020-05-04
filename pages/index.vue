@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col py-5">
         <div class="mx-auto">
-            <img class="w-40 object-cover" src="~/assets/svg/tomato.svg" />
+            <img class="w-40 object-cover cursor-pointer" src="~/assets/svg/tomato.svg" @click="instruction=!instruction"/>
         </div>
         <div class="mx-auto">
             <div class="text-6xl font-bold font-sans tracking-wide md:text-8xl">
@@ -24,10 +24,47 @@
                 The technique breaks down your work into intervals, called a Pomodoro - each at 25 minutes.
             </div>
         </div>
+        <div class="absolute h-screen w-screen bg-gray-800 top-0 z-20 px-6" v-if="instruction">
+            <div class='relative flex justify-center items-center text-white font-sans'>
+                <div class="flex flex-col md:w-2/3 lg:w-1/2">
+                    <div class="text-3xl tracking-wide pt-10 font-semibold text-center md:text-5xl">Why use Focus?</div>
+                    <div class="text-justify tracking-wide">
+                        <p class="py-2 md:px-20 md:px-32 lg:px-32">
+                            During each Pomodora interval (25 minutes), put in maximum focus on your task
+                            and avoid distractions. By focusing, you will find yourself completing projects
+                            faster with less mental fatigue.
+                        </p>
+                        <p class="py-2 md:px-20 md:px-32 lg:px-32">
+                            The goal of this technique is to reduce intenal and external distractions when working.
+                        </p>
+                    </div>
+                    <div class="mt-12 text-3xl tracking-wide pt-10 font-semibold text-center md:text-5xl">
+                        Here's how to use it:
+                    </div>
+                    <div class="px-2 tracking-wide md:px-20 lg:px-32">
+                        <ul class="py-4">
+                            <li class="py-2">1. Decide on a task to do.</li>
+                            <li class="py-2">2. Start the timer & work on your task.</li>
+                            <li class="py-2">3. End your work when timer rings.</li>
+                            <li class="py-2">4. When the timer ends, take a 5 minutes break.</li>
+                            <li class="py-2">5. After 4 pomodoros, take a 30 minutes break.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 pt-10 pr-5">
+                    <i class="fas fa-times text-white text-xl cursor-pointer" @click="instruction=!instruction"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 
 export default {
+    data: function(){
+        return{
+            instruction: false
+        }
+    }
 }
 </script>

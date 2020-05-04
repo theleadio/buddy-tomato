@@ -4,7 +4,7 @@
     <div class="flex-1 -mt-16">
       <nuxt class="pt-40"/>
     </div>
-    <footerWrapper />
+    <footerWrapper class="z-30" />
   </div>
 </template>
 <script>

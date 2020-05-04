@@ -8,7 +8,9 @@ const defaultState = () => {
             displayName:"",
             imgUrl: "",
             token: "",
-            refreshToken:""
+            refreshToken:"",
+            bio:"test",
+            company:"test"
         },
         isLoggedIn: false
     }
@@ -29,16 +31,11 @@ export const mutations = {
     },
     
     setAuthUser: (state, { authUser, claims }) => {
-      console.log(claims)
-      console.log(authUser)
-      state.user = {
-        uid: authUser.uid,
-        email: authUser.email,
-        displayName: authUser.displayName,
-        imgUrl: authUser.photoURL,
-        token: authUser.a.c,
-        refreshToken: authUser.refreshToken
-      }
+      state.user.uid = authUser.uid,
+      state.user.email = authUser.email,
+      state.user.displayName = authUser.displayName,
+      state.user.imgUrl = authUser.photoURL,
+      state.user.refreshToken = authUser.refreshToken
       state.isLoggedIn = true
     }
 }
