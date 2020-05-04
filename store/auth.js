@@ -18,28 +18,28 @@ export const state = () => defaultState()
 
 export const getters = {
   isAuthenticated(state){
-    console.log(state)
     return state.isLoggedIn
   }
 }
 
 export const mutations = {
     resetStore: (state) => {
-      console.log("resetStore")
       Object.assign(state, defaultState());
       // Cookie.remove('rt');
-      },
+    },
     
-    setAuthUser: (state, { authUser }) => {
-        state.user = {
-          uid: authUser.uid,
-          email: authUser.email,
-          displayName: authUser.displayName,
-          imgUrl: authUser.photoURL,
-          token: authUser.a.c,
-          refreshToken: authUser.refreshToken
-        }
-        state.isLoggedIn = true
+    setAuthUser: (state, { authUser, claims }) => {
+      console.log(claims)
+      console.log(authUser)
+      state.user = {
+        uid: authUser.uid,
+        email: authUser.email,
+        displayName: authUser.displayName,
+        imgUrl: authUser.photoURL,
+        token: authUser.a.c,
+        refreshToken: authUser.refreshToken
+      }
+      state.isLoggedIn = true
     }
 }
 
@@ -77,12 +77,12 @@ export const actions = {
   
       }
     },
-    onAuthStateChangedAction({ commit }, { authUser }) {
+    onAuthStateChangedAction({ commit }, { authUser, claims }) {
         if (!authUser) {
             commit('resetStore')
             return
           }
-        commit('setAuthUser', { authUser })
+        commit('setAuthUser', { authUser, claims })
     },
   
     checkVuexStore(ctx) {
