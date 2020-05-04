@@ -13,7 +13,7 @@
                 <form class="w-screen">
                     <div class="mx-auto w-full px-10 md:w-1/2 xl:w-1/4">
                         <div class="relative">
-                            <inputElmt :labelName="'Username'" :labelId="'username'" :focus="false" :value="username" @input="username = $event" 
+                            <inputElmt :labelName="'Email'" :labelId="'username'" :focus="false" :value="email" @input="email = $event" 
                                 :disabled="false" class="border-b shadow-md text-left py-1"/>
                             <div class="absolute top-0 right-0 p-4">
                                 <i class="fas fa-user text-gray-400"></i>
@@ -30,7 +30,8 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center mt-10">
-                        <a href="#" class="font-bold transition duration-300 ease-in-out py-3 px-24 bg-green-500 text-white rounded-full hover:shadow-lg hover:bg-green-700 hover:outline-none hover:no-underline">Log In</a>
+                        <a @click="$route.params['method'] === 'login'?login():createUser()" href="#" class="font-bold transition duration-300 ease-in-out py-3 px-24 bg-green-500 text-white rounded-full hover:shadow-lg hover:bg-green-700 hover:outline-none hover:no-underline"
+                            >{{$route.params['method'] === 'login'?"Log In": "Create Account"}}</a>
                     </div>
                 </form>
             </div>
@@ -49,12 +50,12 @@
                     </div>
                 </div>
             </div>
-            <div class="mx-auto mt-5">
+            <div class="mx-auto mt-5" v-if="$route.params['method'] === 'login'">
                 <div class="flex items-center justify-center my-2 text-sm font-sans">
                     Don't have an account?
                 </div>
                 <div class="flex justify-center">
-                    <a href="" class="font-bold transition duration-300 ease-in-out py-2 px-12 bg-gray-500 text-white rounded-full hover:shadow-lg hover:bg-gray-700 hover:outline-none hover:no-underline">Sign up</a>
+                    <nuxt-link to="/user/signup" class="font-bold transition duration-300 ease-in-out py-2 px-12 bg-gray-500 text-white rounded-full hover:shadow-lg hover:bg-gray-700 hover:outline-none hover:no-underline">Sign up</nuxt-link>
                 </div>
             </div>
         </div>
@@ -69,7 +70,7 @@ export default {
     },
     data: function(){
         return{
-            username: "",
+            email: "",
             password: ""
         }
     },
@@ -81,6 +82,31 @@ export default {
                     this.$router.push("/new")
                 }
             ).catch(e => console.error(e));
+        },
+        createUser: async function() {
+            try {
+                await this.$fireAuth.createUserWithEmailAndPassword(
+                    this.email,
+                    this.password
+                ).then(
+                    result=>this.$router.push("/new")
+                )
+            } catch (e) {
+                console.error(e)
+            }
+        },
+        login: async function(){
+            try{
+                console.log("login");
+                await this.$fireAuth.signInWithEmailAndPassword(
+                    this.email,
+                    this.password
+                ).then(
+                    result=>this.$router.push("/new")
+                )
+            } catch (e){
+                console.error(e)
+            }
         }
     }
 }
