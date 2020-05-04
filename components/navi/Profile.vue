@@ -27,7 +27,7 @@ export default {
         signOut:async function() {
             try {
                 await this.$fireAuth.signOut()
-                this.$router.push("/new")
+                this.$router.push("/")
             } catch (e) {
                 console.log(e)
             }

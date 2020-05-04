@@ -79,7 +79,7 @@ export default {
             const provider = new this.$fireAuthObj.GoogleAuthProvider()
             await this.$fireAuth.signInWithPopup(provider).then(
                 result => {
-                    this.$router.push("/new")
+                    this.$router.push("/")
                 }
             ).catch(e => console.error(e));
         },
@@ -89,7 +89,7 @@ export default {
                     this.email,
                     this.password
                 ).then(
-                    result=>this.$router.push("/new")
+                    result=>this.$router.push("/")
                 )
             } catch (e) {
                 console.error(e)
@@ -102,7 +102,7 @@ export default {
                     this.email,
                     this.password
                 ).then(
-                    result=>this.$router.push("/new")
+                    result=>this.$router.push("/")
                 )
             } catch (e){
                 console.error(e)
