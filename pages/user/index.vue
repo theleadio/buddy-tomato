@@ -98,14 +98,12 @@
                     </div>
                     <div class="relative mt-4">
                         <inputElmt :labelName="'Email'" :labelId="'email'" :focus="false" :value="user.email"
-                            :disabled="!edit" :class="{
+                            :disabled="true" :class="{
                                 'transition':true,
                                 'duration-300':true,
                                 'ease-in-out':true,
                                 'border-b':true,
-                                'border-gray-500':edit,
-                                'shadow-md':!edit,
-                                'shadow-lg':edit,
+                                'shadow-md':true,
                                 'text-left':true,
                                 'py-1':true,
                                 }"
@@ -185,7 +183,7 @@
 <script>
 import InputElement from "~/components/items/Input.vue";
 import TextElement from '~/components/items/TextArea.vue';
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
     middleware: 'authenticate',
@@ -206,15 +204,14 @@ export default {
         })
     },
     methods:{
-        updateUser: function(){
-            console.log("updateUser");
-            console.log(this.user)
-        },
         ...mapMutations({
             setEmail: "auth/setEmail",
             setDisplayName: "auth/setDisplayName",
             setBio: "auth/setBio",
             setCompany: "auth/setCompany"
+        }),
+        ...mapActions({
+            updateUser: "auth/updateUser"
         })
     }
 }

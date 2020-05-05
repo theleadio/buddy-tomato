@@ -6,8 +6,10 @@ const defaultState = () => {
             displayName:"",
             imgUrl: "",
             refreshToken:"",
-            bio:"test",
-            company:"test"
+            idToken:"",
+            accessToken:"",
+            bio:"",
+            company:""
         },
         isLoggedIn: false
     }
@@ -46,6 +48,16 @@ export const mutations = {
     },
     setCompany: (state, company) => {
       state.user.company = company
+    },
+    setIdToken: (state, idToken) => {
+      state.user.idToken = idToken
+    },
+    setAccessToken: (state, accessToken) =>{
+      state.user.accessToken = accessToken
+    },
+    updateDetails: (state, payload) => {
+      state.user.company = payload.company
+      state.user.bio = payload.bio
     }
 }
 
@@ -100,5 +112,5 @@ export const actions = {
         'Success. Nuxt-fire Objects can be accessed in store actions via this.$fire___'
       )
       return
-    }
+    },
 }

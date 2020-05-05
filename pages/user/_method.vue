@@ -23,7 +23,7 @@
                     <div class="mx-auto px-10 w-full md:w-1/2 xl:w-1/4 mt-4">
                         <div class="relative">
                             <inputElmt :labelName="'Password'" :labelId="'password'" :focus="false" :inputType="'password'"
-                            :value="password" @input="password = $event" class="border-b shadow-md text-left py-1" />
+                            :value="password" @input="password = $event" class="border-b shadow-md text-left py-1" @keyup.enter="$route.params['method'] === 'login'?login():createUser()"/>
                             <div class="absolute top-0 right-0 p-4">
                                 <i class="fas fa-key text-gray-400"></i>
                             </div>
@@ -63,7 +63,7 @@
 </template>
 <script>
 import InputElement from "~/components/items/Input.vue";
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
     components:{
@@ -85,6 +85,11 @@ export default {
             const provider = new this.$fireAuthObj.GoogleAuthProvider()
             await this.$fireAuth.signInWithPopup(provider).then(
                 result => {
+                    this.setIdToken(result.credential.idToken)
+                    this.setAccessToken(result.credential.accessToken)
+                    this.$apis.user.signIn(result)
+                    this.$apis.user.getUserDetails(result.user.uid, result.credential.accessToken)
+                        .then(res => this.updateDetails(res))
                     this.$router.push("/")
                 }
             ).catch(e => console.error(e));
@@ -95,7 +100,10 @@ export default {
                     this.email,
                     this.password
                 ).then(
-                    result=>this.$router.push("/")
+                    result=>{
+                        this.$apis.user.signIn(result)
+                        this.$router.push("/")
+                    }
                 )
             } catch (e) {
                 console.error(e)
@@ -103,17 +111,25 @@ export default {
         },
         login: async function(){
             try{
-                console.log("login");
                 await this.$fireAuth.signInWithEmailAndPassword(
                     this.email,
                     this.password
                 ).then(
-                    result=>this.$router.push("/")
+                    result=>{
+                        this.setAccessToken(result.user.xa)
+                        this.$apis.user.signIn(result)
+                        this.$router.push("/")
+                    }
                 )
             } catch (e){
                 console.error(e)
             }
-        }
+        },
+        ...mapMutations({
+            setIdToken: "auth/setIdToken",
+            setAccessToken: "auth/setAccessToken",
+            updateDetails: "auth/updateDetails"
+        })
     }
 }
 </script>

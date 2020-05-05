@@ -1,6 +1,3 @@
-// import firebase from 'firebase/app';
-// import 'firebase/database'
-
 const firebaseConfig = process.env.ENVIRONMENT === "PROD"? process.env.FIREBASE_CRENDETIAL: process.env.FIREBASE_DEV_CRED
 
 // if (!firebase.apps.length) {
@@ -55,6 +52,7 @@ export default {
   */
   plugins: [
     // { src: '~/plugins/localStorage.js', ssr: false }
+    { src:'~/plugins/api-factory.js'},
   ],
   /*
   ** Nuxt.js dev-modules
@@ -68,6 +66,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
     [
       '@nuxtjs/firebase',
       {
@@ -104,6 +103,9 @@ export default {
   /*
   ** Build configuration
   */
+ axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:5000'
+  },
   build: {
     /*
     ** You can extend webpack config here
