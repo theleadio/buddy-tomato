@@ -43,7 +43,7 @@
                 <div class="flex justify-between items-center">
                     <label class="font-sans text-2xl font-medium p-5">Hi {{user.displayName}},</label>
                     <div class="relative">
-                        <button @click="edit=!edit" :class="{
+                        <button @click="edit=!edit; !edit?updateUser():null" :class="{
                             'transition': true,
                             'duration-300':true,
                             'ease-in-out':true,
@@ -61,7 +61,8 @@
                             'active:outline-none':true,
                             'tracking-wide':true,
                             'hidden':!profile,
-                            }" >{{edit?"Done":"Edit"}}</button>
+                            }" 
+                            >{{edit?"Done":"Edit"}}</button>
                         <div class="absolute top-0 right-0 pt-1 pr-3">
                             <i class="fas fa-pen text-white text-sm"></i>
                         </div>
@@ -88,7 +89,9 @@
                                 'shadow-lg':edit,
                                 'text-left':true,
                                 'py-1':true,
-                                }"/>
+                                }"
+                                @input="setDisplayName($event)"
+                                />
                         <div class="absolute top-0 right-0 p-4">
                             <i class="fas fa-user text-gray-400"></i>
                         </div>
@@ -105,7 +108,9 @@
                                 'shadow-lg':edit,
                                 'text-left':true,
                                 'py-1':true,
-                                }"/>
+                                }"
+                                @input="setEmail($event)"
+                                />
                         <div class="absolute top-0 right-0 p-4">
                             <i class="fas fa-envelope text-gray-400"></i>
                         </div>
@@ -122,7 +127,9 @@
                                 'shadow-lg':edit,
                                 'text-left':true,
                                 'py-1':true,
-                                }"/>
+                                }"
+                                @input="setCompany($event)"
+                                />
                         <div class="absolute top-0 right-0 p-4">
                             <i class="fas fa-building text-gray-400"></i>
                         </div>
@@ -140,7 +147,9 @@
                                 'shadow-lg':edit,
                                 'text-left':true,
                                 'py-1':true,
-                                }"/>
+                                }"
+                                @input="setBio($event)"
+                                />
                         <div class="absolute top-0 right-0 p-4">
                             <i class="fas fa-address-card text-gray-400"></i>
                         </div>
@@ -176,7 +185,7 @@
 <script>
 import InputElement from "~/components/items/Input.vue";
 import TextElement from '~/components/items/TextArea.vue';
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
     middleware: 'authenticate',
@@ -194,6 +203,18 @@ export default {
     computed:{
         ...mapState({
             user: state => state.auth.user
+        })
+    },
+    methods:{
+        updateUser: function(){
+            console.log("updateUser");
+            console.log(this.user)
+        },
+        ...mapMutations({
+            setEmail: "auth/setEmail",
+            setDisplayName: "auth/setDisplayName",
+            setBio: "auth/setBio",
+            setCompany: "auth/setCompany"
         })
     }
 }

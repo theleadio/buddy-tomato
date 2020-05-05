@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie'
-
 const defaultState = () => {
     return {
         user: {
@@ -7,7 +5,6 @@ const defaultState = () => {
             email:"",
             displayName:"",
             imgUrl: "",
-            token: "",
             refreshToken:"",
             bio:"test",
             company:"test"
@@ -27,7 +24,6 @@ export const getters = {
 export const mutations = {
     resetStore: (state) => {
       Object.assign(state, defaultState());
-      // Cookie.remove('rt');
     },
     
     setAuthUser: (state, { authUser, claims }) => {
@@ -37,6 +33,19 @@ export const mutations = {
       state.user.imgUrl = authUser.photoURL,
       state.user.refreshToken = authUser.refreshToken
       state.isLoggedIn = true
+    },
+
+    setEmail: (state, email) => {
+      state.user.email = email
+    },
+    setDisplayName: (state, name) => {
+      state.user.displayName = name
+    },
+    setBio: (state, bio) =>{
+      state.user.bio = bio
+    },
+    setCompany: (state, company) => {
+      state.user.company = company
     }
 }
 

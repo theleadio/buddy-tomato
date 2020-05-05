@@ -63,10 +63,16 @@
 </template>
 <script>
 import InputElement from "~/components/items/Input.vue";
+import { mapState } from 'vuex';
 
 export default {
     components:{
         inputElmt: InputElement
+    },
+    computed: {
+        ...mapState({
+            isLoggedIn: state => state.auth.isLoggedIn
+        })
     },
     data: function(){
         return{
