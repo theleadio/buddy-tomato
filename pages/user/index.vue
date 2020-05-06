@@ -163,16 +163,16 @@
                     'h-0':!history,
                     'p-2':true
                 }">
-                    <div class="flex grid grid-cols-6 border-b border-gray-500 shadow-md">
-                        <div class="p-2 font-sans text-gray-500 font-medium">Title</div>
+                    <div class="flex grid grid-cols-7 border-b border-gray-500 shadow-md">
+                        <div class="col-span-3 p-2 font-sans text-gray-500 font-medium text-sm">Title</div>
                         <div class="col-span-2 p-2 font-sans text-gray-500 font-medium">Date</div>
-                        <div class="col-span-3 p-2 font-sans text-gray-500 font-medium">Duration</div>
+                        <div class="col-span-2 p-2 font-sans text-gray-500 font-medium">Duration</div>
                     </div>
-                    <div> <!--LOOP HERE-->
-                        <div class="flex grid grid-cols-6 py-2 border-b border-gray-300 shadow-md">
-                            <div class="p-2 font-sans text-gray-800 text-sm tracking-wider">Task 1</div>
-                            <div class="col-span-2 p-2 font-sans text-gray-800 text-sm tracking-wider">May 5th, 2020</div>
-                            <div class="col-span-3 p-2 font-sans text-gray-800 text-sm tracking-wider">25 minutes 00 Seconds</div>
+                    <div v-for="task in historyTask" :key="task.id">
+                        <div class="flex grid grid-cols-7 py-2 border-b border-gray-300 shadow-md">
+                            <div class="col-span-3 p-2 font-sans text-gray-800 text-xs tracking-wider md:text-sm">{{task.name}}</div>
+                            <div class="col-span-2 p-2 font-sans text-gray-800 text-xs tracking-wider md:text-sm">{{ task.start_time | prettyDate}}</div>
+                            <div class="col-span-2 p-2 font-sans text-gray-800 text-xs tracking-wider md:text-sm">{{ task.task_time | pretty }}</div>
                         </div>
                     </div>
                 </div>
@@ -200,19 +200,44 @@ export default {
     },
     computed:{
         ...mapState({
-            user: state => state.auth.user
+            user: state => state.auth.user,
+            historyTask : state => state.timer.history
         })
     },
     methods:{
+        updateUser(){
+            this.$apis.user.updateUser(this.user)
+        },
         ...mapMutations({
             setEmail: "auth/setEmail",
             setDisplayName: "auth/setDisplayName",
             setBio: "auth/setBio",
-            setCompany: "auth/setCompany"
+            setCompany: "auth/setCompany",
+            setAccessToken: "auth/setAccessToken",
+            updateDetails: "auth/updateDetails"
         }),
         ...mapActions({
-            updateUser: "auth/updateUser"
+            getUsersHistory: "timer/getUsersHistory"
         })
+    },
+    filters:{
+      pretty: function(time) {
+          let minutes = Math.floor((time/1000)/60)
+          let seconds = parseInt((time/1000) % 60);
+          return `${minutes} min : ${seconds.toString().padStart(2,"0")} sec`
+      },
+      prettyDate: function(time){
+          const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+          let dt = new Date(parseInt(time));
+          return `${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`
+      }
+    },
+    async mounted(){
+        this.$apis.user.getUserDetails(this.user.uid, this.user.access_token)
+            .then(res => {
+                this.updateDetails(res)
+            });
+        this.getUsersHistory(this.user);
     }
 }
 </script>

@@ -87,7 +87,7 @@ export const actions = {
           'Claims:',
           claims
         )
-  
+
         await dispatch('auth/onAuthStateChangedAction', {
           authUser,
           claims

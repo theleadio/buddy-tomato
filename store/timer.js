@@ -1,13 +1,16 @@
 const defaultState = () =>{
     return{
         task: {
+            id: "",
             title: "",
             startTime: 0,
             esteTime: 0,
             resetCount: 0,
             pauseCount: 0,
-            finishTime: 0
-        }
+            finishTime: 0,
+            isNew: true,
+        },
+        history: null
     }
 }
 
@@ -32,7 +35,28 @@ export const mutations = {
     setFinishTime: (state)=>{
         state.task.finishTime = new Date().getTime();
     },
+    setId: (state, task_id) =>{
+        state.task.id = task_id
+    },
+    isStarted: (state) => {
+        state.task.isNew = false
+    },
+    setHistory: (state, payload) => {
+        state.history = payload
+    },
     resetStore: (state)=>{
         Object.assign(state, defaultState());
+    }
+}
+
+export const actions = {
+    async getUsersHistory({commit}, authUser){
+        if(!authUser){
+            return
+        }
+        await this.$apis.task.getUserTasks(authUser.uid, authUser.access_token)
+            .then(res => {
+                commit("setHistory", res)
+            })
     }
 }

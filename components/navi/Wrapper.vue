@@ -19,7 +19,7 @@
 <script>
 import Logo from "~/components/navi/Logo.vue";
 import Profile from "~/components/navi/Profile.vue";
-import { mapState } from 'vuex' 
+import { mapState, mapMutations } from 'vuex' 
 
 export default {
     components:{
@@ -31,6 +31,17 @@ export default {
             isLoggedIn: state => state.auth.isLoggedIn,
             user: state=> state.auth,
         })
+    },
+    methods:{
+        ...mapMutations({
+            setAccessToken: "auth/setAccessToken",
+        })
+    },
+    async mounted(){
+        if(this.isLoggedIn){
+            await this.$fireAuthObj().currentUser.getIdToken(true)
+                .then((token) => this.setAccessToken(token));
+        }    
     }
 }
 </script>

@@ -130,6 +130,11 @@ export default {
             setAccessToken: "auth/setAccessToken",
             updateDetails: "auth/updateDetails"
         })
+    },
+    mounted(){
+        if(this.isLoggedIn){
+            this.$router.push("/")
+        }
     }
 }
 </script>
