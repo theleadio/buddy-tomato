@@ -56,15 +56,51 @@
                 </div>
             </div>
         </div>
+        <div class="absolute h-screen w-screen top-0 z-20 px-6 loading" v-if="loadingMessage">
+            <div class="flex h-screen">
+                <div class="m-auto">
+                    <div class="text-white font-sans font-bold text-4xl">Loading Timer...</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 
 export default {
+    transition:{
+      name:"focus",
+      mode:"out-in",
+      duration: { enter: 300, leave: 300 },
+      enterActiveClass: "animated fadeIn",
+      leaveActiveClass: "animated fadeOut"
+    },
     data: function(){
         return{
-            instruction: false
+            instruction: false,
+            loadingMessage: false
+        }
+    },
+    computed:{
+        ...mapState({
+            task: state => state.timer.task
+        })
+    },
+    mounted(){
+        if(this.task.status === "START"){
+            this.loadingMessage = true;
+            setTimeout(() =>{
+                this.$router.push("/timer")
+            }, 3000);
         }
     }
 }
 </script>
+<style>
+.loading{
+    background-color: rgb(0,0,0, .45);
+    backdrop-filter: blur(3px);
+    transition: all 0.1s ease-in-out;
+}
+</style>

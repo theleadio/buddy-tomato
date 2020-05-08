@@ -187,6 +187,13 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
     middleware: 'authenticate',
+    transition:{
+      name:"focus",
+      mode:"out-in",
+      duration: { enter: 300, leave: 300 },
+      enterActiveClass: "animated fadeIn",
+      leaveActiveClass: "animated fadeOut"
+    },
     components:{
         inputElmt: InputElement,
         textElmt: TextElement

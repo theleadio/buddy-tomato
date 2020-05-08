@@ -55,6 +55,9 @@ export const mutations = {
     setAccessToken: (state, accessToken) =>{
       state.user.accessToken = accessToken
     },
+    setUID: (state, uid)=>{
+      state.user.uid = uid
+    },
     updateDetails: (state, payload) => {
       state.user.company = payload.company ? payload.company : ""
       state.user.bio = payload.bio ? payload.bio: ""
@@ -101,6 +104,7 @@ export const actions = {
             return
           }
         commit('setAuthUser', { authUser, claims })
+        this.$router.push("/")
     },
   
     checkVuexStore(ctx) {

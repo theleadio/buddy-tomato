@@ -63,15 +63,23 @@
 </template>
 <script>
 import InputElement from "~/components/items/Input.vue";
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
+    transition:{
+      name:"focus",
+      mode:"out-in",
+      duration: { enter: 300, leave: 300 },
+      enterActiveClass: "animated fadeIn",
+      leaveActiveClass: "animated fadeOut"
+    },
     components:{
         inputElmt: InputElement
     },
     computed: {
         ...mapState({
-            isLoggedIn: state => state.auth.isLoggedIn
+            isLoggedIn: state => state.auth.isLoggedIn,
+            user: state => state.auth.user
         })
     },
     data: function(){
@@ -87,12 +95,20 @@ export default {
                 result => {
                     this.setIdToken(result.credential.idToken)
                     this.setAccessToken(result.credential.accessToken)
+                    this.setUID(result.user.uid)
                     this.$apis.user.signIn(result)
-                    this.$apis.user.getUserDetails(result.user.uid, result.credential.accessToken)
-                        .then(res => this.updateDetails(res))
-                    this.$router.push("/")
                 }
             ).catch(e => console.error(e));
+
+            await this.$apis.user.getUserDetails(this.user.uid, this.user.accessToken)
+                        .then(res => this.updateDetails(res))
+
+            await this.$apis.task.getOnGoingTask(this.user.uid, this.user.accessToken)
+                .then(res =>{
+                    if(Object.keys(res).length !== 0){
+                        this.resumeTimer(res);
+                    }
+                }).catch(err=>console.error(err))
         },
         createUser: async function() {
             try {
@@ -102,7 +118,6 @@ export default {
                 ).then(
                     result=>{
                         this.$apis.user.signIn(result)
-                        this.$router.push("/")
                     }
                 )
             } catch (e) {
@@ -118,7 +133,6 @@ export default {
                     result=>{
                         this.setAccessToken(result.user.xa)
                         this.$apis.user.signIn(result)
-                        this.$router.push("/")
                     }
                 )
             } catch (e){
@@ -128,7 +142,11 @@ export default {
         ...mapMutations({
             setIdToken: "auth/setIdToken",
             setAccessToken: "auth/setAccessToken",
+            setUID: "auth/setUID",
             updateDetails: "auth/updateDetails"
+        }),
+        ...mapActions({
+            resumeTimer : "timer/resumeTimer"
         })
     },
     mounted(){

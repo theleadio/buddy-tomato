@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
     middleware: 'authenticate',
     computed:{
@@ -27,12 +27,16 @@ export default {
         signOut:async function() {
             try {
                 await this.$fireAuth.signOut();
+                this.resetTimer();
                 this.profileDropDown = false;
                 this.$router.push("/")
             } catch (e) {
                 console.log(e)
             }
-        }
+        },
+        ...mapActions({
+            resetTimer: "timer/resetTimer"
+        })
     }
 }
 </script>

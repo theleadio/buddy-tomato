@@ -24,7 +24,7 @@
             <div class="mx-auto my-5 items-center">
                 <div class="text-7xl tracking-wide md:text-9xl">{{ timeLeft | pretty }}</div>
             </div>
-            <div class="mx-auto flex items-center justify-center" v-if="!finished">
+            <div class="mx-auto flex items-center justify-center" v-if="task.status !=='DONE'">
                 <a href="#" :class="{
                   'transition':true,
                   'duration-300':true,
@@ -79,7 +79,7 @@
                     'cursor-default':task.title==='',
                     'focus:outline-none':true,
                     'active:outline-none':true,
-                  }" @click="finishedTask(); finished=true">Finished</a>
+                  }" @click="finishedTask(true)">Finished</a>
                 </div>
             </div>
             <div v-else>
@@ -108,19 +108,25 @@
 </template>
 <script>
 import InputElement from "~/components/items/Input.vue";
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
+    transition:{
+      name:"focus",
+      mode:"out-in",
+      duration: { enter: 300, leave: 300 },
+      enterActiveClass: "animated fadeIn",
+      leaveActiveClass: "animated fadeOut"
+    },
     middleware: 'authenticate',
     components:{
         inputElmt: InputElement
     },
     data: () =>{
         return {
-            timeLeft: process.env.ENVIRONMENT === "PROD"?1500:10,
-            timeInterval: false,
-            finished:false,
-            showMessage: false
+          timeLeft: process.env.ENVIRONMENT === "PROD"?1500:1500,
+          timeInterval: false,
+          showMessage: false
         }
     },
     computed:{
@@ -135,14 +141,12 @@ export default {
         this.setEsteTime(
           new Date().getTime() + 1000 * this.timeLeft
         )
-        if (!this.task.isNew){
-          this.newTask()
-        }
+        this.createTimer(this.user)
       },
       updateTask(){
         this.$apis.task.updateTask(this.task, this.user.accessToken)
       },
-      finishedTask(){
+      finishedTask(finished){
         this.setFinishTime();
         clearInterval(this.timeInterval);
         this.timeInterval = false;
@@ -161,11 +165,7 @@ export default {
               document.cookie = "timeLeft="+ this.timeLeft
             }, 1000);
             this.setTime();
-            if(this.task.isNew){
-              this.isStarted();
-              await this.$apis.task.newTask(this.task, this.user.uid, this.user.accessToken)
-                .then(result => this.setId(result.insertId))
-            }
+            this.createTimer(this.user)
           }
           this.updateTask();
         }else{
@@ -173,13 +173,12 @@ export default {
         }
       },
       newTimer(){
-        this.timeLeft = process.env.ENVIRONMENT === "PROD"?1500:10;
-        this.finished = false;
+        this.timeLeft = process.env.ENVIRONMENT === "PROD"?1500:1500
         this.resetStore()
       },
       resetTimer() {
         if (this.title!==''){
-          this.timeLeft = process.env.ENVIRONMENT === "PROD"?1500:10;
+          this.timeLeft = process.env.ENVIRONMENT === "PROD"?1500:1500
           this.setResetCount()
           this.setTime();
         }else{
@@ -192,15 +191,16 @@ export default {
         snd2.play();
       },
       ...mapMutations({
-        setId: "timer/setId",
         setTitle: "timer/setTitle",
         setResetCount: "timer/setResetCount",
         setPauseCount: "timer/setPauseCount",
         setStartTime: "timer/setStartTime",
         setEsteTime: "timer/setEsteTime",
         setFinishTime: "timer/setFinishTime",
-        isStarted: "timer/isStarted",
-        resetStore: "timer/resetStore"
+        resetStore: "timer/resetStore",
+      }),
+      ...mapActions({
+        createTimer: "timer/createTimer"
       })
     },
     filters:{
@@ -217,11 +217,20 @@ export default {
             this.setFinishTime();
             this.playSound();
             clearInterval(this.timeInterval);
-            this.finished = true;
             this.timeInterval = false;
             this.updateTask();
           }
         }
+      }
+    },
+    mounted(){
+      if(this.task.status === "START"){
+        this.timeLeft = parseInt((this.task.esteTime - (new Date().getTime()))/1000);
+        this.timeInterval = setInterval(() => {
+            this.timeLeft -= 1;
+            document.cookie = "timeLeft="+ this.timeLeft
+          }, 1000);
+          this.setTime();
       }
     }
 }
