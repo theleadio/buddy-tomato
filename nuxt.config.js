@@ -1,24 +1,10 @@
+require('dotenv').config()
 const firebaseConfig = process.env.ENVIRONMENT === "PROD"? process.env.FIREBASE_CRENDETIAL: process.env.FIREBASE_DEV_CRED
-
-// if (!firebase.apps.length) {
-//   firebase.initializeApp(JSON.parse(firebaseConfig))
-// }
-
-// export const fireDb = firebase.database() // --> This alone throws the error mesage.
 
 export default {
   generate: {
     fallback: true
   },
-  
-  // hooks: {
-  //   build: {
-  //     done(builder) {
-  //       fireDb.goOffline()
-  //     }
-  //   }
-  // },
-
   mode: 'universal',
   /*
   ** Headers of the page
