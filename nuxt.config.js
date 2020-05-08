@@ -1,6 +1,6 @@
 require('dotenv').config()
 const firebaseConfig = process.env.ENVIRONMENT === "PROD"? process.env.FIREBASE_CRENDETIAL: process.env.FIREBASE_DEV_CRED
-
+console.log(firebaseConfig);
 export default {
   generate: {
     fallback: true
