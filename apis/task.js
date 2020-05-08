@@ -30,5 +30,17 @@ export default axios => ({
             "/v1/task/all", config
         ).then(res => res.data)
         .catch(err => console.error(err))
+    },
+    getOnGoingTask: (uid, access_token) => {
+        let config ={
+            headers:{
+                UID:uid,
+                AUTH_TOKEN: access_token
+            }
+        }
+        return axios.get(
+            "/v1/task/ongoing", config
+        ).then(res => res.data)
+        .catch(err => console.error(err))
     }
 })
