@@ -56,8 +56,8 @@ export const mutations = {
       state.user.accessToken = accessToken
     },
     updateDetails: (state, payload) => {
-      state.user.company = payload.company
-      state.user.bio = payload.bio
+      state.user.company = payload.company ? payload.company : ""
+      state.user.bio = payload.bio ? payload.bio: ""
     }
 }
 
