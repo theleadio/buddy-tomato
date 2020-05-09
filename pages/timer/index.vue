@@ -232,6 +232,9 @@ export default {
           }, 1000);
           this.setTime();
       }
+    },
+    beforeDestroy(){
+      this.resetStore()
     }
 }
 </script>

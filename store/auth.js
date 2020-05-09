@@ -31,8 +31,8 @@ export const mutations = {
     setAuthUser: (state, { authUser, claims }) => {
       state.user.uid = authUser.uid,
       state.user.email = authUser.email,
-      state.user.displayName = authUser.displayName,
-      state.user.imgUrl = authUser.photoURL,
+      state.user.displayName = authUser.displayName ? authUser.displayName : (state.user.displayName? state.user.displayName:""),
+      state.user.imgUrl = authUser.photoURL ? authUser.photoURL : "",
       state.user.refreshToken = authUser.refreshToken
       state.isLoggedIn = true
     },
@@ -59,6 +59,7 @@ export const mutations = {
       state.user.uid = uid
     },
     updateDetails: (state, payload) => {
+      state.user.displayName = payload.name;
       state.user.company = payload.company ? payload.company : ""
       state.user.bio = payload.bio ? payload.bio: ""
     }
@@ -83,13 +84,6 @@ export const actions = {
       /** Get the VERIFIED authUser from the server */
       if (ctx.res && ctx.res.locals && ctx.res.locals.user) {
         const { allClaims: claims, ...authUser } = ctx.res.locals.user
-    
-        console.info(
-          'Auth User verified on server-side. User: ',
-          authUser,
-          'Claims:',
-          claims
-        )
 
         await dispatch('auth/onAuthStateChangedAction', {
           authUser,
@@ -98,13 +92,14 @@ export const actions = {
   
       }
     },
-    onAuthStateChangedAction({ commit }, { authUser, claims }) {
-        if (!authUser) {
-            commit('resetStore')
-            return
-          }
-        commit('setAuthUser', { authUser, claims })
-        this.$router.push("/")
+    async onAuthStateChangedAction({ commit, dispatch }, { authUser, claims }) {
+      if (!authUser) {
+          commit('resetStore')
+          return
+      }
+      await commit('setAuthUser', { authUser, claims });
+      await dispatch('getUserDetails', {authUser})
+      this.$router.push("/")
     },
   
     checkVuexStore(ctx) {
@@ -117,4 +112,14 @@ export const actions = {
       )
       return
     },
+    getUserDetails({commit}, {authUser}){
+      if(!authUser){
+        return
+      }
+      this.$apis.user.getUserDetails(authUser.uid, authUser.xa)
+          .then(payload => {
+              commit("updateDetails", payload);
+          })
+      
+    }
 }
