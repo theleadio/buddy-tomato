@@ -100,9 +100,6 @@ export default {
                 }
             ).catch(e => console.error(e));
 
-            await this.$apis.user.getUserDetails(this.user.uid, this.user.accessToken)
-                        .then(res => this.updateDetails(res))
-
             await this.$apis.task.getOnGoingTask(this.user.uid, this.user.accessToken)
                 .then(res =>{
                     if(Object.keys(res).length !== 0){
@@ -132,9 +129,16 @@ export default {
                 ).then(
                     result=>{
                         this.setAccessToken(result.user.xa)
+                        this.setUID(result.user.uid)
                         this.$apis.user.signIn(result)
                     }
                 )
+                await this.$apis.task.getOnGoingTask(this.user.uid, this.user.accessToken)
+                    .then(res =>{
+                        if(Object.keys(res).length !== 0){
+                            this.resumeTimer(res);
+                        }
+                    }).catch(err=>console.error(err))
             } catch (e){
                 console.error(e)
             }
@@ -143,7 +147,6 @@ export default {
             setIdToken: "auth/setIdToken",
             setAccessToken: "auth/setAccessToken",
             setUID: "auth/setUID",
-            updateDetails: "auth/updateDetails"
         }),
         ...mapActions({
             resumeTimer : "timer/resumeTimer"
@@ -153,6 +156,6 @@ export default {
         if(this.isLoggedIn){
             this.$router.push("/")
         }
-    }
+    },
 }
 </script>

@@ -2,6 +2,7 @@
     <div class="h-20 border-b shadow-md">
         <div class="flex justify-between items-center">
             <logo class="p-5"/>
+            
             <client-only  class="p-5">
                 <div v-if="!isLoggedIn">
                     <div v-if="!(['/user/login','/user/signup'].indexOf($route.path)>=0)">
