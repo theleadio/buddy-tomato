@@ -190,7 +190,7 @@ export default {
     transition:{
       name:"focus",
       mode:"out-in",
-      duration: { enter: 300, leave: 300 },
+      duration: { enter: 1000, leave: 500 },
       enterActiveClass: "animated fadeIn",
       leaveActiveClass: "animated fadeOut"
     },
