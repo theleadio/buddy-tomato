@@ -2,7 +2,7 @@ const defaultState = () =>{
     return{
         task: {
             id: "",
-            title: "",
+            title: "Pomodoro",
             startTime: 0,
             esteTime: 0,
             resetCount: 0,

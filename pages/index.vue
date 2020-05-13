@@ -72,9 +72,9 @@ export default {
     transition:{
       name:"focus",
       mode:"out-in",
-      duration: { enter: 300, leave: 300 },
-      enterActiveClass: "animated fadeIn",
-      leaveActiveClass: "animated fadeOut"
+      duration: { enter: 1000, leave: 300 },
+      enterActiveClass: "animated fadeInLeft",
+      leaveActiveClass: "animated fadeOutLeft"
     },
     data: function(){
         return{
