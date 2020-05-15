@@ -116,10 +116,12 @@ export const actions = {
       if(!authUser){
         return
       }
-      this.$apis.user.getUserDetails(authUser.uid, authUser.xa)
-          .then(payload => {
-              commit("updateDetails", payload);
-          })
+      if('user' in this.$apis){
+        this.$apis.user.getUserDetails(authUser.uid, authUser.xa)
+            .then(payload => {
+                commit("updateDetails", payload);
+            })
+      }
       
     }
 }
