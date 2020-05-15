@@ -116,7 +116,7 @@ export const actions = {
       if(!authUser){
         return
       }
-      if('user' in this.$apis){
+      if(this.$apis){
         this.$apis.user.getUserDetails(authUser.uid, authUser.xa)
             .then(payload => {
                 commit("updateDetails", payload);
