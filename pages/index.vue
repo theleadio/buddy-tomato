@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col py-5">
         <div class="mx-auto">
-            <img class="w-40 object-cover cursor-pointer" src="~/assets/svg/tomato.svg" @click="instruction=!instruction"/>
+            <img class="w-40 object-cover cursor-pointer" src="~/assets/img/tomato.png" @click="instruction=!instruction"/>
         </div>
         <div class="mx-auto">
             <div class="text-6xl font-bold font-sans tracking-wide md:text-8xl">
