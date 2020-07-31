@@ -15,10 +15,20 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Time management for your daily task' },
-      { property: 'og:image', content:"https://focus.thelead.io/img/focus_landing.png" },
-      { property: 'og:url', content:"https://focus.thelead.io" },
-      { property: 'og:type', content:"website" },
-      { property: 'og:description', content:"Time management for your daily task" }
+      // Facebook / Open Graph
+      { hid: 'og:title', name: 'og:title', content: 'Focus - Pomodoro Time Management' },
+      { hid: 'og:image', property: 'og:image', content:"https://focus.thelead.io/img/focus_landing.png" },
+      { hid: 'og:url', property: 'og:url', content:"https://focus.thelead.io" },
+      { hid: 'og:type', property: 'og:type', content:"website" },
+      { hid: 'og:description', property: 'og:description', content:"Time management for your daily task" },
+
+      // Twotter
+      { hid: 'twitter:title', name: 'twitter:title', content: 'Focus - Pomodoro Time Management' },
+      { hid: 'twitter:image', property: 'twitter:image', content:"https://focus.thelead.io/img/focus_landing.png" },
+      { hid: 'twitter:url', property: 'twitter:url', content:"https://focus.thelead.io" },
+      { hid: 'twitter:card', property: 'twitter:card', content:"summary_large_image" },
+      { hid: 'twitter:description', property: 'twitter:description', content:"Time management for your daily task" }
+
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
