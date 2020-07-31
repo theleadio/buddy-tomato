@@ -15,11 +15,6 @@ export default {
     components:{
         naviWrapper: NaviWrapper,
         footerWrapper: FooterWrapper
-    },
-    head(){
-      return {
-        title: "Focus"
-      }
     }
 }
 </script>

@@ -14,7 +14,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Time management for your daily task' }
+      { hid: 'description', name: 'description', content: 'Time management for your daily task' },
+      { property: 'og:image', content:"https://focus.thelead.io/img/focus_landing.png" },
+      { property: 'og:url', content:"https://focus.thelead.io" },
+      { property: 'og:type', content:"website" },
+      { property: 'og:description', content:"Time management for your daily task" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -54,7 +58,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    'nuxt-seo',
+    // 'nuxt-seo',
     [
       '@nuxtjs/firebase',
       {
@@ -93,14 +97,15 @@ export default {
     }]
     // ['cookie-universal-nuxt', { alias: 'focus-cookiz' }]
   ],
-  seo : {
-    name : 'Focus',
-    title : 'Focus',
-    templateTitle : '%title%',
-    description : 'A productivity app based on pomodoro technique',
-    image : '/img/focus_landing.png',
-    author : 'Edmund Hee'
-  },
+  // seo : {
+  //   name : 'Focus',
+  //   title : 'Focus',
+  //   templateTitle : '%title%',
+  //   description : 'Time management for your daily task',
+  //   image : 'https://focus.thelead.io/img/focus_landing.png',
+  //   author : 'Edmund Hee',
+  //   keywords: ['theleadio', 'focus', 'pomodoro']
+  // },
   /*
   ** Build configuration
   */

@@ -4,7 +4,7 @@
         style="background-color: rgb(29, 161, 242);"
         network="twitter"
         url="https://focus.thelead.io/"
-        :title="`Finished another my task: ${title}`"
+        :title="`Focus, helps me to finish my task ( ${title} ) in 25 minutes!` "
         description="A simple focus app that uses pomodoro technique. Take a rest after focus for 25 minutes"
         quote="A simple focus app that uses pomodoro technique. Take a rest after focus for 25 minutes"
         hashtags="leadofficial,worksmart"

@@ -90,13 +90,6 @@
                   <div class="flex">
                     <facebookShare :title="task.title"/>
                     <twitterShare :title="task.title"/>
-                    <linkedInShare :title="task.title"/>
-                    <!-- <div class="mt-10 text-lg font-sans px-2 text-center">Share with your friends!</div>
-                    <div class="flex items-center justify-center py-2">
-                      <button class="mx-2">Facebook</button>
-                      <button class="mx-2">Tweet</button>
-                      <button class="mx-2">LinkedIn</button>
-                    </div> -->
                   </div>
                   <div class="flex justify-center items-center mt-5">
                     <button @click="newTimer" class="transition duration-300 ease-in-out rounded-full bg-green-500 py-3 px-6 text-white text-sm font-bold hover:no-underline hover:bg-green-600 focus:outline-none active:outline-none">
@@ -113,7 +106,7 @@
 import InputElement from "~/components/items/Input.vue";
 import FacebookShare from "~/components/items/FacebookShare.vue"
 import TwitterShare from "~/components/items/TwitterShare.vue"
-import LinkedInShare from "~/components/items/LinkedInShare.vue"
+
 import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
@@ -128,8 +121,7 @@ export default {
     components:{
         inputElmt: InputElement,
         facebookShare: FacebookShare,
-        twitterShare: TwitterShare,
-        linkedInShare: LinkedInShare
+        twitterShare: TwitterShare
     },
     data: () =>{
         return {
