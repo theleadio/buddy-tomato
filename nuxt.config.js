@@ -98,8 +98,9 @@ export default {
     title : 'Focus',
     templateTitle : '%title%',
     description : 'A productivity app based on pomodoro technique',
-    image : '/img/focus_landing.png',
-    author : 'Edmund Hee'
+    image : 'https://focus.thelead.io/img/focus_landing.png',
+    author : 'Edmund Hee',
+    keywords: ['theleadio', 'focus', 'pomodoro']
   },
   /*
   ** Build configuration
