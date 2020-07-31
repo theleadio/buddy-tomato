@@ -54,6 +54,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    'nuxt-seo',
     [
       '@nuxtjs/firebase',
       {
@@ -85,8 +86,21 @@ export default {
        ]
       }
     ],
+    ['vue-social-sharing/nuxt', {
+      networks: {
+        focuslinkedin: 'https://www.linkedin.com/shareArticle?mini=true&url=@u'
+      }
+    }]
     // ['cookie-universal-nuxt', { alias: 'focus-cookiz' }]
   ],
+  seo : {
+    name : 'Focus',
+    title : 'Focus',
+    templateTitle : '%title%',
+    description : 'A productivity app based on pomodoro technique',
+    image : '/img/focus_landing.png',
+    author : 'Edmund Hee'
+  },
   /*
   ** Build configuration
   */

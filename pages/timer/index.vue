@@ -87,14 +87,17 @@
                 <div class="flex flex-col">
                   <div class="text-3xl font-sans px-2 text-center">Congrats,</div>
                   <div class="text-3xl font-sans px-2 text-center">{{user.displayName}} !</div>
-                  <!-- <div class="flex flex-col">
-                    <div class="mt-10 text-lg font-sans px-2 text-center">Share with your friends!</div>
+                  <div class="flex">
+                    <facebookShare :title="task.title"/>
+                    <twitterShare :title="task.title"/>
+                    <linkedInShare :title="task.title"/>
+                    <!-- <div class="mt-10 text-lg font-sans px-2 text-center">Share with your friends!</div>
                     <div class="flex items-center justify-center py-2">
                       <button class="mx-2">Facebook</button>
                       <button class="mx-2">Tweet</button>
                       <button class="mx-2">LinkedIn</button>
-                    </div>
-                  </div> -->
+                    </div> -->
+                  </div>
                   <div class="flex justify-center items-center mt-5">
                     <button @click="newTimer" class="transition duration-300 ease-in-out rounded-full bg-green-500 py-3 px-6 text-white text-sm font-bold hover:no-underline hover:bg-green-600 focus:outline-none active:outline-none">
                         New Timer
@@ -108,6 +111,9 @@
 </template>
 <script>
 import InputElement from "~/components/items/Input.vue";
+import FacebookShare from "~/components/items/FacebookShare.vue"
+import TwitterShare from "~/components/items/TwitterShare.vue"
+import LinkedInShare from "~/components/items/LinkedInShare.vue"
 import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
@@ -120,7 +126,10 @@ export default {
     },
     middleware: 'authenticate',
     components:{
-        inputElmt: InputElement
+        inputElmt: InputElement,
+        facebookShare: FacebookShare,
+        twitterShare: TwitterShare,
+        linkedInShare: LinkedInShare
     },
     data: () =>{
         return {
