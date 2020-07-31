@@ -58,7 +58,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    'nuxt-seo',
+    // 'nuxt-seo',
     [
       '@nuxtjs/firebase',
       {
@@ -97,15 +97,15 @@ export default {
     }]
     // ['cookie-universal-nuxt', { alias: 'focus-cookiz' }]
   ],
-  seo : {
-    name : 'Focus',
-    title : 'Focus',
-    templateTitle : '%title%',
-    description : 'Time management for your daily task',
-    image : 'https://focus.thelead.io/img/focus_landing.png',
-    author : 'Edmund Hee',
-    keywords: ['theleadio', 'focus', 'pomodoro']
-  },
+  // seo : {
+  //   name : 'Focus',
+  //   title : 'Focus',
+  //   templateTitle : '%title%',
+  //   description : 'Time management for your daily task',
+  //   image : 'https://focus.thelead.io/img/focus_landing.png',
+  //   author : 'Edmund Hee',
+  //   keywords: ['theleadio', 'focus', 'pomodoro']
+  // },
   /*
   ** Build configuration
   */
