@@ -29,12 +29,12 @@
                 <div class="flex flex-col md:w-2/3 lg:w-1/2">
                     <div class="text-3xl tracking-wide pt-10 font-semibold text-center md:text-5xl">Why use Focus?</div>
                     <div class="text-justify tracking-wide">
-                        <p class="py-2 md:px-20 md:px-32 lg:px-32">
+                        <p class="py-2 md:px-20 lg:px-32">
                             During each Pomodora interval (25 minutes), put in maximum focus on your task
                             and avoid distractions. By focusing, you will find yourself completing projects
                             faster with less mental fatigue.
                         </p>
-                        <p class="py-2 md:px-20 md:px-32 lg:px-32">
+                        <p class="py-2 md:px-20 lg:px-32">
                             The goal of this technique is to reduce intenal and external distractions when working.
                         </p>
                     </div>

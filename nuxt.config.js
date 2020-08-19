@@ -5,6 +5,7 @@ export default {
   generate: {
     fallback: true
   },
+  components: true,
   mode: 'universal',
   /*
   ** Headers of the page
@@ -32,11 +33,12 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { href: 'https://cdn.jsdelivr.net/npm/animate.css@3.5.1', rel: 'stylesheet',  type:"text/css"}
+      { href: 'https://cdn.jsdelivr.net/npm/animate.css@3.5.1', rel: 'stylesheet',  type:"text/css"},
+      { href: 'https://fonts.googleapis.com/css?family=Poppins:100|Poppins:200|Poppins:300|Poppins:400|Poppins:500|Poppins:600|Poppins:700|Poppins:800|Poppins:900', rel: 'stylesheet'}
     ],
     script: [
       { src: 'https://code.jquery.com/jquery-3.4.1.slim.min.js', type: 'text/javascript' },
-      { src: 'https://kit.fontawesome.com/48d20e9c42.js', crossorigin: 'anonymous', type:'text/javascript'},
+      { src: 'https://kit.fontawesome.com/48d20e9c42.js', crossorigin: 'anonymous', type:'text/javascript'}
     ]
   },
   /*
@@ -105,17 +107,7 @@ export default {
         focuslinkedin: 'https://www.linkedin.com/shareArticle?mini=true&url=@u'
       }
     }]
-    // ['cookie-universal-nuxt', { alias: 'focus-cookiz' }]
   ],
-  // seo : {
-  //   name : 'Focus',
-  //   title : 'Focus',
-  //   templateTitle : '%title%',
-  //   description : 'Time management for your daily task',
-  //   image : 'https://focus.thelead.io/img/focus_landing.png',
-  //   author : 'Edmund Hee',
-  //   keywords: ['theleadio', 'focus', 'pomodoro']
-  // },
   /*
   ** Build configuration
   */
