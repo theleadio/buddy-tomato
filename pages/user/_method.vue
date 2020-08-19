@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full w-full md:h-screen md:w-screen">
+    <div class="h-full w-full md:h-screen md:w-screen mb-20">
         <div class="flex flex-col py-5">
             <div class="mx-auto">
                 <img class="w-36 object-cover" src="~/assets/svg/tomato.svg" />
